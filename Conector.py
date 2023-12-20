@@ -14,7 +14,32 @@ try:
 
     # Criar um cursor para executar comandos SQL
     cursor = conn.cursor()
-
+    def verifica_todos():
+        cursor.execute("SELECT * FROM produtos;")
+        dados = cursor.fetchall()
+        print("( ID | Nome | Preço | Estoque )")
+        for linha in dados:
+            print(linha)
+    def verifica_nome():
+                    nome = str(input("Insira o nome do Produto: "))
+                    print("( ID | Nome | Preço | Estoque )")
+                    cursor.execute("SELECT * FROM produtos\n"
+                                   f"Where NomeProduto = '{nome}';")
+                    dados = cursor.fetchall()
+                    for linha in dados:
+                        print(linha)
+    def verifica_preco_maior():
+                    print("( ID | Nome | Preço | Estoque )")
+                    cursor.execute("SELECT * FROM produtos ORDER BY PrecoProd DESC")
+                    dados = cursor.fetchall()
+                    for linha in dados:
+                        print(linha)
+    def verifica_preco_menor():
+                    print("( ID | Nome | Preço | Estoque )")
+                    cursor.execute("SELECT * FROM produtos ORDER BY PrecoProd ASC")
+                    dados = cursor.fetchall()
+                    for linha in dados:
+                        print(linha)
     while True:
         digito = int(input('Digite os numeros a seguir para cada operação\n'
                         '1 - Para verificar produtos em estoque\n'
@@ -32,31 +57,13 @@ try:
                                    '5 - Para Ordenar os produtos a partir da maior para a menor quantidade em estoque\n'
                                    '6 - Para Ordenar os produtos a partir da menor para a maior quantidade em estoque\n'))
                 if digito == 1:
-                    print("( ID | Nome | Preço | Estoque )")
-                    cursor.execute("SELECT * FROM produtos;")
-                    dados = cursor.fetchall()
-                    for linha in dados:
-                        print(linha)
+                    verifica_todos()
                 elif digito == 2:
-                    nome = str(input("Insira o nome do Produto: "))
-                    print("( ID | Nome | Preço | Estoque )")
-                    cursor.execute("SELECT * FROM produtos\n"
-                                   f"Where NomeProduto = '{nome}';")
-                    dados = cursor.fetchall()
-                    for linha in dados:
-                        print(linha)
+                    verifica_nome()
                 elif digito == 3:
-                    print("( ID | Nome | Preço | Estoque )")
-                    cursor.execute("SELECT * FROM produtos ORDER BY PrecoProd DESC")
-                    dados = cursor.fetchall()
-                    for linha in dados:
-                        print(linha)
+                    verifica_preco_maior()
                 elif digito == 4:
-                    print("( ID | Nome | Preço | Estoque )")
-                    cursor.execute("SELECT * FROM produtos ORDER BY PrecoProd ASC")
-                    dados = cursor.fetchall()
-                    for linha in dados:
-                        print(linha)
+                    verifica_preco_menor()
                 elif digito == 5:
                     print("( ID | Nome | Preço | Estoque )")
                     cursor.execute("SELECT * FROM produtos ORDER BY quantidade DESC")

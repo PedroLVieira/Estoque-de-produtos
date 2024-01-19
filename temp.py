@@ -1,4 +1,5 @@
 import mysql.connector
+from PyQt5 import uic, QtWidgets
 
 config = {
     'user': 'root',
@@ -8,21 +9,12 @@ config = {
     'database': 'banco'
 }
 
-
 try:
     conn = mysql.connector.connect(**config)
     print("Conexão bem-sucedida!")
 
     # Criar um cursor para executar comandos SQL
     cursor = conn.cursor()
-    def menu():
-        int(input('Insira um dos digitos a seguir\n'
-                    '1 - Para verificar todos os produtos\n'
-                    '2 - Procurar produtos por nome\n'
-                    '3 - Para Ordenar os produtos do maior para o menor preco\n'
-                    '4 - Para Ordenar os produtos do menor para o maior preco\n'
-                    '5 - Para Ordenar os produtos a partir da maior para a menor quantidade em estoque\n'
-                    '6 - Para Ordenar os produtos a partir da menor para a maior quantidade em estoque\n'))
     def verifica_todos():
         cursor.execute("SELECT * FROM produtos;")
         dados = cursor.fetchall()
@@ -129,7 +121,13 @@ try:
                         '5 - Para fechar a conexão com o Sistema\n'))
         try:
             if digito == 1:
-                digito = menu()
+                int(input('Insira um dos digitos a seguir\n'
+                    '1 - Para verificar todos os produtos\n'
+                    '2 - Procurar produtos por nome\n'
+                    '3 - Para Ordenar os produtos do maior para o menor preco\n'
+                    '4 - Para Ordenar os produtos do menor para o maior preco\n'
+                    '5 - Para Ordenar os produtos a partir da maior para a menor quantidade em estoque\n'
+                    '6 - Para Ordenar os produtos a partir da menor para a maior quantidade em estoque\n'))
                 if digito == 1:
                     verifica_todos()
                 elif digito == 2:
